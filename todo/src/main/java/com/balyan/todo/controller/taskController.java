@@ -6,6 +6,7 @@ import com.balyan.todo.entity.Task;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -15,18 +16,25 @@ import java.util.*;
 public class taskController {
     @Autowired
     TaskService taskService;
-    List<Task> s = new ArrayList<>();
     @PostMapping()
-    public void createtask(@RequestBody Task aya){
-       taskService.savetask(aya);
+    public ResponseEntity<?> createtask(@RequestBody Task aya){
+       return taskService.savetask(aya);
     }
     @GetMapping()
-    public List<Task> getall(){
+    public ResponseEntity<?> getall(){
         return taskService.getall();
     }
     @GetMapping("/id/{mid}")
-    public Task getbyid(@PathVariable ObjectId mid){
-        return taskService.getbyid(mid).orElse(null);
+    public ResponseEntity<?> getbyid(@PathVariable ObjectId mid){
+        return taskService.getbyid(mid);
+    }
+    @DeleteMapping("/id/{mid}")
+    public ResponseEntity<?> deletebyid(@PathVariable ObjectId mid){
+        return taskService.deletebyid(mid);
+    }
+    @PutMapping("/id/{mid}")
+    public ResponseEntity<?> update(@RequestBody Task aya,@PathVariable ObjectId mid){
+        return taskService.updatebyid(mid,aya);
     }
 
 
