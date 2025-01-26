@@ -1,15 +1,12 @@
 package com.balyan.todo.controller;
 
-import com.balyan.todo.Repo.TasksRepo;
 import com.balyan.todo.Services.TaskService;
 import com.balyan.todo.entity.Task;
-import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
 
 @RestController
 @RequestMapping("tasks")
