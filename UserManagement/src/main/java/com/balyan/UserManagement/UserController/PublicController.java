@@ -10,20 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 public class PublicController {
-    private final UserService userService;
 
     @Autowired
-    public PublicController(UserService userService) {
-        this.userService = userService;
-    }
+    private  UserService userService;
 
     @PostMapping
     public ResponseEntity<String> addNewUser(@RequestBody User user) {
-        boolean isAdded = userService.addUser(user);
-        if (isAdded) {
+        String isAdded = userService.addUser(user);
+        if (isAdded.equals("user created successfully")) {
             return ResponseEntity.status(201).body("User created successfully");
         }
-        return ResponseEntity.status(400).body("Failed to create user");
+        return ResponseEntity.status(400).body(isAdded);
     }
     @GetMapping
     public ResponseEntity<?> allusers(){
