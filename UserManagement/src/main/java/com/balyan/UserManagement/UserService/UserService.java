@@ -1,22 +1,35 @@
 package com.balyan.UserManagement.UserService;
 
-import com.balyan.UserManagement.UserRepo.userRepo;
+import com.balyan.UserManagement.UserRepo.UserRepo;
 import com.balyan.UserManagement.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Component
+import java.util.List;
+
+@Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final UserRepo userRepo;
+
     @Autowired
-    private userRepo us;
-    public boolean adduser(User user){
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    public boolean addUser(User user) {
         try {
-        us.save(user);
-        return true;}
-        catch (Exception e){
+            userRepo.save(user);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error saving user: {}", e.getMessage());
             return false;
         }
     }
-
-
+    public List<User> allusers(){
+        return (List<User>) userRepo.findAll();
+    }
 }
+
