@@ -1,4 +1,4 @@
-package com.balyan.UserManagement.UserController;
+package com.balyan.UserManagement.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

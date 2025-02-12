@@ -1,10 +1,9 @@
-package com.balyan.UserManagement.UserService;
+package com.balyan.UserManagement.Service;
 
-import com.balyan.UserManagement.UserRepo.UserRepo;
+import com.balyan.UserManagement.Repo.UserRepo;
 import com.balyan.UserManagement.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class UserService {
     public String addUser(User user) {
         try {
             if(user.getPassword().length()<6){return "password length too small nigesh";}
-            if (userRepo.findByemail(user.getEmail())!=null){return "email already exists nigesh";}
+            if (userRepo.findByEmail(user.getEmail())!=null){return "email already exists nigesh";}
             userRepo.save(user);
             return "user created successfully";
         } catch (Exception e) {
