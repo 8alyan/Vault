@@ -3,6 +3,8 @@ package com.balyan.UserManagement.Service;
 import com.balyan.UserManagement.Repo.UserRepo;
 import com.balyan.UserManagement.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +14,14 @@ public class UserService {
 
     @Autowired
     private  UserRepo userRepo;
+    private final static PasswordEncoder code = new BCryptPasswordEncoder();
 
     public String addUser(User user) {
         try {
             if(user.getPassword().length()<6){return "password length too small nigesh";}
             if (userRepo.findByEmail(user.getEmail())!=null){return "email already exists nigesh";}
+            user.setPassword(code.encode(user.getPassword()));
+            user.setRoles("USER");
             userRepo.save(user);
             return "user created successfully";
         } catch (Exception e) {

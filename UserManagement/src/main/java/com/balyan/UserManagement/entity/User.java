@@ -3,7 +3,8 @@ package com.balyan.UserManagement.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.Arrays;
+import java.util.List;
 
 
 @Entity
@@ -17,4 +18,15 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String roles="";
+
+    public List<String> getRoles() {
+        return Arrays.stream(roles.split(",")).toList();
+    }
+
+    public void setRoles(String role) {
+        if(this.roles.isEmpty()){this.roles=role;}
+        else{
+        this.roles+=","+role;}
+    }
 }

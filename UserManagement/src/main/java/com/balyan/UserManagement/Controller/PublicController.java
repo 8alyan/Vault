@@ -22,9 +22,6 @@ public class PublicController {
         }
         return ResponseEntity.status(400).body(isAdded);
     }
-    @GetMapping
-    public ResponseEntity<?> allusers(){
-        return new ResponseEntity<>(userService.allusers(), HttpStatus.OK);
-    }
+
 }
 
