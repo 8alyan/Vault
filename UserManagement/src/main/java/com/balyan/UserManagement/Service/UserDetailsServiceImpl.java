@@ -15,16 +15,16 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
     @Autowired
     private UserRepo userRepo;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user= userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user= userRepo.findByEmail(email);
         if(user!=null){
             return org.springframework.security.core.userdetails.User.builder()
-                    .username(user.getUsername())
+                    .username(user.getEmail())
                     .password(user.getPassword())
                     .roles(user.getRoles().toArray(new String[0]))
                     .build();
 
         }
-        throw new UsernameNotFoundException("User not Found with username: "+username);
+        throw new UsernameNotFoundException("User not Found with username: "+email);
     }
 }

@@ -3,7 +3,6 @@ package com.balyan.UserManagement.Controller;
 import com.balyan.UserManagement.Service.UserService;
 import com.balyan.UserManagement.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

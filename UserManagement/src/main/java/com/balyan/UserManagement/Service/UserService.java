@@ -19,7 +19,6 @@ public class UserService {
     public String addUser(User user) {
         try {
             if(user.getPassword().length()<6){return "password length too small nigesh";}
-            if (userRepo.findByEmail(user.getEmail())!=null){return "email already exists nigesh";}
             user.setPassword(code.encode(user.getPassword()));
             user.setRoles("USER");
             userRepo.save(user);
@@ -29,7 +28,26 @@ public class UserService {
         }
     }
     public List<User> allusers(){
-        return (List<User>) userRepo.findAll();
+        return  userRepo.findAll();
+    }
+    public User getbyid(int id){
+        return userRepo.findById(id).orElse(null);
+
+    }
+    public User updateuser(User purana,User nyaa){
+        nyaa.setId(purana.getId());
+        for(String j : purana.getRoles()){
+            nyaa.setRoles(j);
+        }
+        nyaa.setPassword(code.encode(nyaa.getPassword()));
+        userRepo.save(nyaa);
+        return nyaa;
+    }
+    public void deleteuser(int id){
+        userRepo.deleteById(id);
+    }
+    public void saveuser(User nyaa){
+        userRepo.save(nyaa);
     }
 }
 
