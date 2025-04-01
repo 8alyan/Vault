@@ -1,10 +1,10 @@
-package com.amit.Hotel.Management;
+package com.balyan.UserManagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HotelManagementApplicationTests {
+class UserManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
